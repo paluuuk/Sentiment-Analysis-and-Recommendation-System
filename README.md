@@ -1,91 +1,81 @@
-# Sentiment Analysis and Recommendation System
+# Airbnb Sentiment & Recommendation Analysis
 
-This project implements a sentiment analysis pipeline combined with a content-based recommendation system using Airbnb listing and review data. The objective is to demonstrate how unstructured text data (user reviews) can be leveraged alongside structured listing features to derive insights, predict outcomes, and generate recommendations.
+Applied NLP and recommendation-system project using Airbnb listing, review, and booking data to combine **sentiment analysis, content-based recommendation, price modeling, and demand exploration** in one analytical workflow.
 
-The project was developed as an applied data science and machine learning exercise, integrating natural language processing, regression modeling, and exploratory time series analysis.
+The project is best viewed as an end-to-end data science case study: it starts from raw structured and unstructured data, engineers sentiment and listing features, evaluates predictive relationships, and builds similarity-based recommendations.
 
----
+## Project Scope
 
-## Project Objectives
+The analysis covers four related problems:
 
-The key objectives of this project are:
+1. **Review sentiment** — extract opinion polarity from guest reviews
+2. **Content-based recommendations** — recommend similar listings using listing and sentiment features
+3. **Price modeling** — explore non-linear relationships between listing attributes and price
+4. **Demand analysis** — examine availability and booking patterns over time
 
-- Analyze Airbnb listings to understand pricing and demand patterns
-- Perform sentiment analysis on customer reviews to extract opinion polarity
-- Build predictive models for price estimation
-- Explore booking trends using time series analysis
-- Develop a content-based recommendation system informed by sentiment and listing features
+## Analytical Pipeline
 
----
+```text
+Airbnb Listings + Reviews + Calendar Data
+                 ↓
+          Data Cleaning
+                 ↓
+     Text / Feature Processing
+          ↙             ↘
+ Sentiment Features   Listing Features
+          ↘             ↙
+       Combined Feature Space
+          ↓             ↓
+ Recommendation     Price / Demand
+    Analysis           Analysis
+```
+
+## Methods
+
+### Sentiment analysis
+
+Review text is cleaned and processed using NLP techniques including token normalization / lemmatization and polarity scoring. Sentiment values are then aggregated so review information can be combined with structured listing attributes.
+
+### Recommendation system
+
+The project uses a **content-based recommendation approach** based on feature similarity. TF-IDF-style representations and cosine similarity are used to identify listings with similar characteristics rather than relying on collaborative user-user behavior.
+
+### Predictive modeling
+
+The notebook explores regression-based modeling for Airbnb pricing and related outcomes, including non-linear methods such as **Random Forest regression** and **Support Vector Machines** alongside exploratory regression techniques.
+
+### Demand / temporal analysis
+
+Calendar and availability data are used to inspect time-dependent booking patterns and demand behavior.
 
 ## Repository Structure
 
-| File / Directory | Description |
-|------------------|-------------|
-| `Sentiment_Analysis.ipynb` | Main notebook containing data preprocessing, sentiment analysis, modeling, and recommendations |
-| `listings.csv` | Airbnb listings dataset with pricing and property features |
-| `reviews.csv` | Raw customer review text |
-| `calendar.csv` | Booking calendar data used for time series analysis |
-| `polarity_reviews.csv` | Reviews with computed sentiment polarity |
-| `polarity_values_reviews.csv` | Aggregated sentiment scores |
-| `comments.png`, `seattle.jpg` | Visual assets used in analysis |
-| `.gitignore` | Git ignore configuration |
+| File | Purpose |
+|---|---|
+| `Sentiment_Analysis.ipynb` | Main analysis notebook covering preprocessing, NLP, prediction, and recommendations |
+| `listings.csv` | Structured Airbnb listing attributes |
+| `reviews.csv` | Raw review text |
+| `calendar.csv` | Availability / calendar information |
+| `polarity_reviews.csv` | Intermediate sentiment-enriched review data |
+| `polarity_values_reviews.csv` | Derived / aggregated sentiment outputs |
+| `comments.png`, `seattle.jpg` | Analysis / presentation assets |
 
----
+## Tech Stack
 
-## Methodology
+**Python · Pandas · NumPy · scikit-learn · NLP · TF-IDF · cosine similarity · Random Forest · SVM · Jupyter**
 
-### 1. Data Preprocessing
-- Cleaning missing and inconsistent values
-- Normalizing numerical features
-- Tokenizing and cleaning review text
+## Current Repository Status
 
-### 2. Sentiment Analysis
-- Natural Language Processing techniques applied to review text
-- Sentiment polarity extraction to classify reviews as positive or negative
-- Aggregation of sentiment scores at the listing level
+This repository preserves the original exploratory analysis and therefore contains raw and generated datasets directly alongside the notebook. That makes it reproducible from the existing files, but it is not the structure I would use for a production data or ML project.
 
-### 3. Predictive Modeling
-- Regression models to estimate listing prices
-- Random Forest Regressor used to capture non-linear relationships
-- Model evaluation using standard regression metrics
+A cleaner engineering version would:
 
-### 4. Time Series Analysis
-- Analysis of booking trends over time
-- Demand estimation based on historical availability data
+- keep source data outside Git or provide a download script
+- separate generated features / outputs from raw inputs
+- move reusable preprocessing and recommendation logic into `src/`
+- pin dependencies in `requirements.txt` or `pyproject.toml`
+- add tests for feature transformations and recommendation logic
 
-### 5. Recommendation System
-- Content-based recommendation approach
-- Listings recommended based on similarity of features and sentiment profiles
-- No collaborative filtering or user-user interaction modeling used
+## Why keep this project
 
----
-
-## Technologies Used
-
-- Python
-- Pandas, NumPy
-- Scikit-learn
-- Natural Language Processing (NLP)
-- Jupyter Notebook
-- Matplotlib and Seaborn for visualization
-
----
-
-## Getting Started
-
-### Prerequisites
-- Python 3.8 or higher
-- Jupyter Notebook
-
-### Installation
-
-```bash
-git clone https://github.com/paluuuk/Sentiment-Analysis-and-Recommendation-System.git
-cd Sentiment-Analysis-and-Recommendation-System
-
-python -m venv venv
-# Windows: venv\Scripts\activate
-# macOS/Linux: source venv/bin/activate
-
-pip install pandas numpy scikit-learn matplotlib seaborn nltk
+This is a supporting portfolio project rather than a flagship engineering repository. It demonstrates breadth across **NLP, recommender systems, regression, feature engineering, and exploratory analytics**, complementing the deeper computer-vision and software projects elsewhere on this profile.
