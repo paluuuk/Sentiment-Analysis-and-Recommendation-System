@@ -4,4 +4,10 @@ scikit-learn
 matplotlib
 seaborn
 nltk
+textblob
+langdetect
+wordcloud
+plotly
+scipy
+Pillow
 jupyter

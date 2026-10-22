@@ -1,81 +1,45 @@
-# Airbnb Sentiment & Recommendation Analysis
+# Airbnb Sentiment and Recommendation Analysis
 
-Applied NLP and recommendation-system project using Airbnb listing, review, and booking data to combine **sentiment analysis, content-based recommendation, price modeling, and demand exploration** in one analytical workflow.
+An exploratory Python case study combining listing attributes, review text, and calendar records to study pricing, review sentiment, demand patterns, and content-based listing recommendations.
 
-The project is best viewed as an end-to-end data science case study: it starts from raw structured and unstructured data, engineers sentiment and listing features, evaluates predictive relationships, and builds similarity-based recommendations.
+## Technical components
 
-## Project Scope
+| Area | Implementation in the notebook |
+| --- | --- |
+| Review sentiment | NLTK VADER and TextBlob polarity/subjectivity |
+| Text features | Word/ngram exploration and TF-IDF over listing names and descriptions |
+| Recommendations | Linear kernel on normalized TF-IDF vectors to obtain cosine similarities |
+| Price modeling | Linear/regression experiments, polynomial features, Random Forest, and SVM-based exploration |
+| Temporal analysis | Calendar availability and price patterns |
 
-The analysis covers four related problems:
+These are related analytical experiments, not a deployed recommendation service or a demonstrated causal model of demand.
 
-1. **Review sentiment** — extract opinion polarity from guest reviews
-2. **Content-based recommendations** — recommend similar listings using listing and sentiment features
-3. **Price modeling** — explore non-linear relationships between listing attributes and price
-4. **Demand analysis** — examine availability and booking patterns over time
+## Files
 
-## Analytical Pipeline
+- [`Sentiment_Analysis.ipynb`](Sentiment_Analysis.ipynb): analysis source and explanatory notes.
+- [`requirements.txt`](requirements.txt): packages imported by the notebook.
+- `listings.csv`, `reviews.csv`, `calendar.csv`: input data used by the original experiment.
+- `polarity_reviews.csv`, `polarity_values_reviews.csv`: intermediate sentiment artifacts.
 
-```text
-Airbnb Listings + Reviews + Calendar Data
-                 ↓
-          Data Cleaning
-                 ↓
-     Text / Feature Processing
-          ↙             ↘
- Sentiment Features   Listing Features
-          ↘             ↙
-       Combined Feature Space
-          ↓             ↓
- Recommendation     Price / Demand
-    Analysis           Analysis
+Generated notebook outputs have been cleared so the analysis source is practical to inspect on GitHub. The original dataset files remain in the repository; the repository is still larger than a code-only package.
+
+## Run locally
+
+```bash
+git clone https://github.com/paluuuk/Sentiment-Analysis-and-Recommendation-System.git
+cd Sentiment-Analysis-and-Recommendation-System
+python -m venv .venv
+# Activate .venv using the command for your shell.
+python -m pip install -r requirements.txt
+jupyter notebook Sentiment_Analysis.ipynb
 ```
 
-## Methods
+Run from the repository root so the relative CSV paths resolve. Download the NLTK resources requested by the notebook when prompted. Language-detection and text-analysis dependencies are included in the dependency list.
 
-### Sentiment analysis
+## Evaluation and limitations
 
-Review text is cleaned and processed using NLP techniques including token normalization / lemmatization and polarity scoring. Sentiment values are then aggregated so review information can be combined with structured listing attributes.
+The notebook explores multiple prediction tasks and data transformations. Random train/test splits and correlations from a single marketplace dataset should not be interpreted as a production forecast, a causal demand estimate, or a generalization guarantee.
 
-### Recommendation system
+The TF-IDF vectorizer uses a valid minimum document count of one. Dependencies are not version-locked, and a complete rerun is still required to verify compatibility and reproduce metrics in a new environment. No new model scores are claimed by this cleanup.
 
-The project uses a **content-based recommendation approach** based on feature similarity. TF-IDF-style representations and cosine similarity are used to identify listings with similar characteristics rather than relying on collaborative user-user behavior.
-
-### Predictive modeling
-
-The notebook explores regression-based modeling for Airbnb pricing and related outcomes, including non-linear methods such as **Random Forest regression** and **Support Vector Machines** alongside exploratory regression techniques.
-
-### Demand / temporal analysis
-
-Calendar and availability data are used to inspect time-dependent booking patterns and demand behavior.
-
-## Repository Structure
-
-| File | Purpose |
-|---|---|
-| `Sentiment_Analysis.ipynb` | Main analysis notebook covering preprocessing, NLP, prediction, and recommendations |
-| `listings.csv` | Structured Airbnb listing attributes |
-| `reviews.csv` | Raw review text |
-| `calendar.csv` | Availability / calendar information |
-| `polarity_reviews.csv` | Intermediate sentiment-enriched review data |
-| `polarity_values_reviews.csv` | Derived / aggregated sentiment outputs |
-| `comments.png`, `seattle.jpg` | Analysis / presentation assets |
-
-## Tech Stack
-
-**Python · Pandas · NumPy · scikit-learn · NLP · TF-IDF · cosine similarity · Random Forest · SVM · Jupyter**
-
-## Current Repository Status
-
-This repository preserves the original exploratory analysis and therefore contains raw and generated datasets directly alongside the notebook. That makes it reproducible from the existing files, but it is not the structure I would use for a production data or ML project.
-
-A cleaner engineering version would:
-
-- keep source data outside Git or provide a download script
-- separate generated features / outputs from raw inputs
-- move reusable preprocessing and recommendation logic into `src/`
-- pin dependencies in `requirements.txt` or `pyproject.toml`
-- add tests for feature transformations and recommendation logic
-
-## Why keep this project
-
-This is a supporting portfolio project rather than a flagship engineering repository. It demonstrates breadth across **NLP, recommender systems, regression, feature engineering, and exploratory analytics**, complementing the deeper computer-vision and software projects elsewhere on this profile.
+**Stack:** Python, pandas, NumPy, scikit-learn, NLTK, TextBlob, Plotly, Matplotlib, seaborn, wordcloud.
