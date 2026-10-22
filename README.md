@@ -43,3 +43,11 @@ The notebook explores multiple prediction tasks and data transformations. Random
 The TF-IDF vectorizer uses a valid minimum document count of one. Dependencies are not version-locked, and a complete rerun is still required to verify compatibility and reproduce metrics in a new environment. No new model scores are claimed by this cleanup.
 
 **Stack:** Python, pandas, NumPy, scikit-learn, NLTK, TextBlob, Plotly, Matplotlib, seaborn, wordcloud.
+
+## Related engineering projects
+
+- [Customer segmentation](https://github.com/paluuuk/Customer-segmentation)
+- [Deal Preflight product engineering](https://github.com/paluuuk/deal-preflight)
+
+[View all selected engineering work](https://github.com/paluuuk)
+
